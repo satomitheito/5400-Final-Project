@@ -1,6 +1,8 @@
 import transformers
 import torch
 import pandas as pd
+import logging
+logger = logging.getLogger(__name__)
 
 encoder_model_name = "cl-tohoku/bert-base-japanese-v2"
 decoder_model_name = "openai-community/gpt2"
@@ -37,14 +39,14 @@ def translate_articles(df):
     counter = 1
     for content in df['content']:
         try:
-            print("Translating article " + str(counter))
+            logger.info("Translating article " + str(counter))
             translation = translate_in_chunks(content)  # Use the new chunking function
             translations.append(translation)
-            print("Translation for article " + str(counter) + " complete")
+            logger.info("Translation for article " + str(counter) + " complete")
             counter += 1
         except Exception as e:
             translations.append(None)
-            print(f"Error translating content: {e}")
+            logger.info(f"Error translating content: {e}")
     
     df['translation'] = translations
     return df
