@@ -1,0 +1,30 @@
+project:
+  type: website
+
+website:
+  title: "website"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - authors.qmd
+      - data.qmd
+      - trans_sent.qmd
+      - sentiment_analysis.qmd
+    right:
+      - icon: github
+        href: https://github.com/satomitheito/5400-Final-Project
+        aria-label: GitHub
+
+  page-footer:
+    right: |
+      Made with [Quarto](https://quarto.org/)<br>
+
+format:
+  html:
+    theme: vapor
+    css: styles.css
+    toc: true
+
+
+

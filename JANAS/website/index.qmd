@@ -1,0 +1,24 @@
+---
+title: "JANAS: Japanese and American News Analysis through Sentiment"
+---
+
+
+## Project Objective
+
+As a result, through web scraping, translations, and deep learning sentiment analysis, we hope to provide a snapshot of an  empirical review towards gaining an understanding of how the US and Japan portray news in the media. 
+
+## Methodologies
+
+
+
+## Acknoledgements
+
+Shoutout to our NLP Professor Trevor Adriaanse for his guidance and support on this project. 
+
+
+
+
+
+
+
+
