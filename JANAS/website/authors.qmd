@@ -4,4 +4,3 @@ title: "Authors"
 
 Authors of this project
 
-
