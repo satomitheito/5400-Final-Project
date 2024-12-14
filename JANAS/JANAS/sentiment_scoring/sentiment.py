@@ -3,6 +3,8 @@ import torch
 from langdetect import detect
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
+import logging
+logger = logging.getLogger(__name__)
 nltk.download('vader_lexicon')
 
 
@@ -12,12 +14,12 @@ def analyze_sentiment(article: str):
 
     if lang == "en":
         # English article sentiment analysis
-        print("Detected language: English")
+        logger.info("Detected language: English") 
         sid = SentimentIntensityAnalyzer()
         sentiment = sid.polarity_scores(article)
-        print(sentiment)
+        logger.info(sentiment) 
     elif lang == "ja":
-        print("Detected language: Japanese")
+        logger.info("Detected language: Japanese") 
         
         # Load Japanese BERT model and tokenizer
         model_name = "christian-phu/bert-finetuned-japanese-sentiment"
@@ -50,9 +52,10 @@ def analyze_sentiment(article: str):
         sentiment_scores['compound'] = compound_score
         
         sentiment = sentiment_scores
-        print(sentiment)
+        logger.info(sentiment)
     else:
         sentiment = {"error": f"Unsupported language detected: {lang}"}
+        logger.info(sentiment)
 
     return sentiment
 
