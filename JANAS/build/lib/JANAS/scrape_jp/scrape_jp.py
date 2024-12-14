@@ -195,32 +195,32 @@ def get_sankei_arts(article_url):
 def get_article_dict(topic_dict, src):
     if src == "mainichi":
         mainichi_art_urls = get_urls(topic_dict, "mainichi")
-        mainichi_art_urls['title'] = []
+        mainichi_art_urls['titles'] = []
         mainichi_art_urls['content'] = []
         for article in mainichi_art_urls["link"]:
             logger.info("Getting content for mainichi article at " + article)
             title, content = get_mainichi_arts(article)
-            mainichi_art_urls['title'].append(title)
+            mainichi_art_urls['titles'].append(title)
             mainichi_art_urls['content'].append(content)
         return mainichi_art_urls
     elif src == "nhk":
         nhk_arts_urls = get_urls(topic_dict, "nhk")
-        nhk_arts_urls['title'] = []
+        nhk_arts_urls['titles'] = []
         nhk_arts_urls['content'] = []
         for article in nhk_arts_urls["link"]:
             logger.info("Getting content for nhk article at " + article)
             title, content = get_nhk_arts(article)
-            nhk_arts_urls['title'].append(title)
+            nhk_arts_urls['titles'].append(title)
             nhk_arts_urls['content'].append(content)
         return nhk_arts_urls
     elif src == "sankei":
         sankei_arts_urls = get_urls(topic_dict, "sankei")
-        sankei_arts_urls['title'] = []
+        sankei_arts_urls['titles'] = []
         sankei_arts_urls['content'] = []
         for article in sankei_arts_urls["link"]:
             logger.info("Getting content for sankei article at " + article)
             title, content = get_sankei_arts(article)
-            sankei_arts_urls['title'].append(title)
+            sankei_arts_urls['titles'].append(title)
             sankei_arts_urls['content'].append(content)
         return sankei_arts_urls
     else:
