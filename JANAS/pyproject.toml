@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "janas"
+version = "0.1.0"
+description = "A package for running multi-lingual sentiment analysis on Japanese and American news articles"
+authors = ["Samyu Vakkalanka, Trey Roark, Satomi Ito"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+pandas = "^2.2.3"
+newspaper3k = "^0.2.8"
+beautifulsoup4 = "^4.12.3"
+requests = "^2.32.3"
+selenium = "^4.27.1"
+transformers = "^4.47.0"
+torch = "^2.5.1"
+langdetect = "^1.0.9"
+nltk = "^3.9.1"
+seaborn = "^0.13.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
