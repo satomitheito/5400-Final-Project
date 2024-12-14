@@ -4,3 +4,8 @@ title: "Authors"
 
 Authors of this project
 
+
+
+- Samyu Vakkalanka
+- Satomi Ito
+- Trey Roark
