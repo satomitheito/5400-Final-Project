@@ -1,5 +1,0 @@
----
-title: "Data"
----
-
-Talking about Data Collection and stuff
