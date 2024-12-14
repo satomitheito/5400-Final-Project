@@ -9,6 +9,18 @@ nltk.download('vader_lexicon')
 
 
 def analyze_sentiment(article: str):
+    
+    """
+    Function that takes in article content as a string and conduct sentiment analysis based on language. 
+    If Englihs:
+        VADER 
+    If Japanese:
+        BERT Tokenization
+        Bert model
+        Softmax
+        Calculating compound score
+    """
+
     # Detect the language of the article
     lang = detect(article)
 

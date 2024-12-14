@@ -19,10 +19,12 @@ dependencies:
   - transformers
   - spacy
   - scipy
+  - seaborn
   - scikit-learn
   - pandas
   - matplotlib
   - metaphone
+  - newspaper
   - levenshtein
   - torch
   - langdetect

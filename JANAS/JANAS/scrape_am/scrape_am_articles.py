@@ -15,7 +15,6 @@ def fetch_and_save_articles(sections, source_name, bias):
     - source_name --> name of news source to include
     - bias --> string indicating the bias of the source
     """
-    
     data = {
         "link": [],
         "source": [],
