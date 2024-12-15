@@ -8,6 +8,10 @@ Allow us to introduce JANAS, a Japanese and American News Analysis through Senti
 
 As a result, through web scraping, translations, and deep learning sentiment analysis, we hope to provide a snapshot of an empirical review towards gaining an understanding of how the US and Japan portray news in the media. 
 
+To learn more about this package, our methods, and our findings, please visit our [website]()!
+[]()
+
+
 ## Installation
 
 ```bash
