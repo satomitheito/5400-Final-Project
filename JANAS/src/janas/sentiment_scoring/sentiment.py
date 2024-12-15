@@ -12,7 +12,7 @@ def analyze_sentiment(article: str):
     
     """
     Function that takes in article content as a string and conduct sentiment analysis based on language. 
-    If Englihs:
+    If English:
         VADER 
     If Japanese:
         BERT Tokenization
