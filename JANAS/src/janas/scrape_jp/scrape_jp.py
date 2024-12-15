@@ -71,6 +71,9 @@ def get_sankei_art_urls(src_url):
 
 
 def get_nhk_art_urls(src_url):
+    """
+    Function to get list of articles from topic page of nhk
+    """
     # Set up Selenium WebDriver
     """
     Function to get list of article urls from topic page of NHK
