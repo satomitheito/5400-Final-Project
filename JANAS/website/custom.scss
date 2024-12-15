@@ -1,0 +1,635 @@
+/*-- scss:defaults --*/
+// quarto-scss-analysis-annotation { "origin": "vapor (builtin theme)" }
+
+$theme: "vapor" !default;
+
+html, body {
+    height: 100%; // Ensures both html and body stretch to full page height
+    margin: 0;
+    padding: 0;
+  }
+
+//
+// Color system
+//
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #170229 !default;
+$black:    #000 !default;
+
+$blue:    #1ba2f6 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #ea39b8 !default;
+$red:     #e44c55 !default;
+$orange:  #f1b633 !default;
+$yellow:  #ffc107 !default;
+$green:   #3cf281 !default;
+$teal:    #3f81a2 !default;
+$cyan:    #32fbe2 !default;
+
+$primary:       $purple !default;
+$secondary:     $pink !default;
+$success:       $green !default;
+$info:          $blue !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         #44d9e8 !default;
+$dark:          $gray-900 !default;
+
+$min-contrast-ratio:   1.2 !default;
+
+// Options
+
+// $enable-rounded:              false !default;
+
+// Body
+
+$body-bg:                   #1a0933 !default;
+$body-color:                $cyan !default;
+
+// Links
+
+$link-color:                              $body-color !default;
+
+// Components
+
+$border-width:                0 !default;
+
+$border-radius:               .15rem !default;
+$border-radius-sm:            .05rem !default;
+
+$component-active-bg:         $pink !default;
+
+// Fonts
+
+// stylelint-disable-next-line value-keyword-case
+$font-family-sans-serif:      Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$text-muted:                  rgba($body-color, .3) !default;
+
+$blockquote-footer-color:     $text-muted !default;
+
+// Tables
+
+$table-color:                 $white !default;
+
+$table-bg-scale:              0% !default;
+
+// Forms
+
+$input-bg:                              lighten($body-bg, 10%) !default;
+$input-disabled-color:                  $gray-500 !default;
+$input-disabled-bg:                     lighten($body-bg, 5%) !default;
+
+$input-color:                           $white !default;
+
+$input-placeholder-color:               rgba($white, .4) !default;
+
+$input-group-addon-bg:                  $input-disabled-bg !default;
+
+$form-select-disabled-color:        $input-placeholder-color !default;
+$form-select-disabled-bg:           $input-disabled-bg !default;
+
+$form-file-button-bg:             $input-group-addon-bg !default;
+$form-file-button-hover-bg:       darken($form-file-button-bg, 2%) !default;
+
+$form-range-track-bg:             $input-bg !default;
+
+$form-range-thumb-disabled-bg:             $purple !default;
+
+// Navs
+
+$nav-link-disabled-color:           $text-muted !default;
+
+$nav-tabs-link-active-color:        $component-active-bg !default;
+
+// Dropdowns
+
+$dropdown-link-hover-bg:            rgba($white, .15) !default;
+
+// Pagination
+
+$pagination-bg:                     transparent !default;
+
+$pagination-focus-bg:               transparent !default;
+
+$pagination-hover-bg:               transparent !default;
+
+$pagination-disabled-color:         $text-muted !default;
+$pagination-disabled-bg:            transparent !default;
+
+// Cards
+
+$card-border-width:                 2px !default;
+$card-cap-color:                    $white !default;
+$card-color:                        $white !default;
+
+// Tooltips
+
+$tooltip-opacity:                   1 !default;
+
+// Popovers
+
+$popover-bg:                        $primary !default;
+
+$popover-header-color:              $white !default;
+
+$popover-body-color:                $white !default;
+
+// Toasts
+
+$toast-color:                       $white !default;
+$toast-background-color:            $primary !default;
+
+$toast-header-color:                $toast-color !default;
+$toast-header-background-color:     $toast-background-color !default;
+
+// Modals
+
+$modal-content-color:               $white !default;
+$modal-content-bg:                  $primary !default;
+
+// Progress bars
+
+$progress-bg:                       $input-disabled-bg !default;
+
+// List group
+
+$list-group-color:                  $white !default;
+$list-group-bg:                     $input-disabled-bg !default;
+$list-group-hover-bg:               $pink !default;
+$list-group-disabled-color:         $text-muted !default;
+$list-group-action-color:           $body-color !default;
+$list-group-action-hover-color:     $white !default;
+$list-group-action-active-bg:       $list-group-hover-bg !default;
+
+// Breadcrumbs
+
+$breadcrumb-divider-color:          $text-muted !default;
+$breadcrumb-active-color:           $component-active-bg !default;
+
+
+
+/*-- scss:rules --*/
+
+
+// Variables
+
+$web-font-path: "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" !default;
+@if $web-font-path {
+  @import url($web-font-path);
+}
+
+$outrun: false !default;
+
+// Mixins
+
+@mixin text-shadow($color) {
+  text-shadow: 0 0 1px rgba($color, .6), 0 0 3px rgba($color, .5), 0 0 .5rem rgba($color, .3), 0 0 2rem rgba($color, .2);
+}
+
+@mixin text-shadow-sm($color) {
+  text-shadow: 0 0 1px rgba($color, .3), 0 0 2px rgba($color, .3), 0 0 5px rgba($color, .2);
+}
+
+@mixin box-shadow($color) {
+  box-shadow: 0 0 2px rgba($color, .9), 0 0 4px rgba($color, .4), 0 0 1rem rgba($color, .3), 0 0 4rem rgba($color, .1);
+}
+
+@mixin box-shadow-lg($color) {
+  box-shadow: 0 0 2rem rgba(tint-color($color, 10%), .4), 0 0 8rem rgba(tint-color($color, 10%), .3);
+}
+
+@mixin header-shadow($color) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    @include text-shadow($color);
+  }
+}
+
+// Body
+
+/* Keyframe animation for moving gradient background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Keyframe animation for moving gradient */
+/* Keyframe animation for moving gradient */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* Body background with dark purple gradient */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  /* Deep, dark purples and blues for the gradient */
+  background: linear-gradient(
+    120deg,
+    #0d001a, /* Darkest purple */
+    #1a0933, /* Rich deep purple */
+    #29144d, /* Subtle dark violet */
+    #120d29  /* Very dark blue-purple */
+  );
+  background-size: 300% 300%; /* Make it large for smooth animation */
+  background-attachment: fixed; /* Fix the background in place */
+  animation: gradientShift 12s ease infinite; /* Animate the gradient */
+  
+  color: #e6e6e6; /* Soft light gray for text readability */
+
+  box-shadow: none; /* No glow to keep it subtle and dark */
+}
+
+.text-center {
+  text-align: center; /* Centers the text horizontally */
+  margin: 10px auto; /* Optional: Adds vertical spacing */
+}
+
+
+
+// Typography
+
+@include header-shadow($cyan);
+
+.text {
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      @include text-shadow-sm($value);
+    }
+  }
+
+  &-white {
+    @include text-shadow-sm($white);
+    @include header-shadow($white);
+  }
+
+  &-muted {
+    @include text-shadow-sm(shade-color($text-muted, 20%));
+  }
+}
+
+a {
+  @include text-shadow-sm($link-color);
+}
+
+.blockquote {
+
+  &-footer {
+    @include text-shadow-sm(shade-color($blockquote-footer-color, 20%));
+  }
+}
+
+hr {
+  border-top: 1px solid $primary;
+  @include box-shadow($primary);
+  opacity: 1;
+}
+
+// Tables
+
+table,
+.table {
+  @include text-shadow-sm($white);
+}
+
+// Buttons
+
+.btn {
+  @each $color, $value in $theme-colors {
+    @if (($color != dark) or ($color != link)) {
+      &-#{$color},
+      &-outline-#{$color} {
+        @include box-shadow($value);
+      }
+    }
+
+    &-#{$color} {
+      @include text-shadow-sm($white);
+    }
+
+    &-outline-#{$color} {
+      color: $white;
+      border-width: 2px;
+    }
+  }
+
+  &-dark {
+    @include box-shadow($primary);
+  }
+
+  &-link {
+    box-shadow: none;
+    @include text-shadow($body-color);
+  }
+
+  &-outline-dark {
+    color: $white;
+  }
+}
+
+// Navbars
+
+.navbar {
+  @each $color, $value in $theme-colors {
+    &.bg-#{$color} {
+      @include box-shadow($value);
+    }
+  }
+
+  &[data-bs-theme="dark"] {
+    &,
+    a {
+      @include text-shadow-sm($white);
+    }
+
+    .navbar-brand {
+      @include text-shadow($white);
+    }
+  }
+
+  &[data-bs-theme="light"] {
+    &,
+    a {
+      @include text-shadow-sm($black);
+    }
+
+    .navbar-brand {
+      @include text-shadow($black);
+    }
+  }
+}
+
+// Navs
+
+/* Keyframe animation for pulsating effect */
+@keyframes pulsate {
+  0% {
+    text-shadow: 0 0 5px #fff, 0 0 10px $pink, 0 0 20px $purple;
+  }
+  50% {
+    text-shadow: 0 0 10px #fff, 0 0 20px $pink, 0 0 30px $purple;
+  }
+  100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px $pink, 0 0 20px $purple;
+  }
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: $purple; /* Same purple background */
+  height: 60px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: white;
+}
+
+/* Pulsating effect for the "JANAS" title */
+.navbar-brand {
+  font-size: 1.5rem; /* Ensure visibility */
+  font-weight: bold; /* Bold font */
+  color: #fff; /* White text */
+  animation: pulsate 2s infinite; /* Apply pulsating animation */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Navigation links */
+.nav-link {
+  color: $white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1rem;
+
+  &:hover {
+    text-decoration: underline; /* Underline effect on hover */
+  }
+}
+
+.image-row {
+  display: flex; /* Enables horizontal alignment */
+  flex-wrap: wrap; /* Allows wrapping if images are too wide */
+  justify-content: center; /* Aligns images in the center */
+  gap: 20px; /* Adds space between images */
+}
+
+.image-row img {
+  max-width: 100%; /* Ensures the image doesn’t overflow */
+  height: auto; /* Maintains aspect ratio */
+}
+
+
+// Forms
+
+legend {
+  @include text-shadow($body-color);
+}
+
+.valid-feedback {
+  @include text-shadow-sm($success);
+}
+
+.invalid-feedback {
+  @include text-shadow-sm($danger);
+}
+
+// Indicators
+
+.alert {
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      color: $white;
+      background-color: $value;
+      @include text-shadow-sm($white);
+      @include box-shadow-lg($value);
+    }
+  }
+
+  .alert-link,
+  a {
+    color: $white;
+  }
+
+  @include header-shadow($white);
+}
+
+.progress {
+  overflow: visible;
+
+  &-bar {
+    @include box-shadow($primary);
+
+    @each $color, $value in $theme-colors {
+      &.bg-#{$color} {
+        @include box-shadow($value);
+      }
+    }
+  }
+}
+
+.tooltip {
+  --bs-tooltip-bg: var(--bs-body-bg);
+  --bs-tooltip-color: var(--bs-body-color);
+
+  &-inner,
+  .arrow {
+    @include box-shadow-lg($primary);
+  }
+}
+
+.modal,
+.popover,
+.toast {
+  @include text-shadow-sm($white);
+  @include header-shadow($white);
+}
+
+.popover,
+.toast {
+  @include box-shadow-lg($primary);
+}
+
+.modal {
+  &-content {
+    @include box-shadow-lg($primary);
+  }
+}
+
+// Containers
+
+.list-group {
+
+  &-item.active {
+    @include header-shadow($white);
+  }
+}
+
+.card {
+  background-color: transparent;
+  @include text-shadow-sm($white);
+
+  @each $color, $value in $theme-colors {
+    @if ($color != dark) {
+      &.border-#{$color} {
+        @include box-shadow($value);
+      }
+    }
+  }
+
+  &.border-dark {
+    @include box-shadow($primary);
+  }
+
+  @include header-shadow($white);
+}
+
+/* General Panel Styling */
+.panel {
+  background-color: rgba(26, 9, 51, 0.9); /* Dark purple with slight transparency */
+  color: #e6e6e6; /* Soft light gray text for contrast */
+  border: 1px solid #6f42c1; /* Purple border */
+  border-radius: 8px; /* Rounded corners for a smoother look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  padding: 20px; /* Add spacing inside the panel */
+  max-width: 85%; /* Adjust the panel width to make it smaller */
+  margin: 14px auto; /* Center the panel and reduce vertical space */
+}
+
+/* Panel Header */
+.panel > h2, 
+.panel > h3 {
+  color: #ffffff; /* Light pink for headings */
+  margin-bottom: 10px; /* Space below the header */
+  border-bottom: 1px solid #6f42c1; /* Optional: Underline the header */
+  padding-bottom: 5px; /* Space for the underline */
+}
+
+/* Links inside Panels */
+.panel a {
+  color: #32fbe2; /* Bright cyan for links */
+  text-decoration: none;
+}
+
+.panel a:hover {
+  text-decoration: underline;
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End in original position */
+  }
+}
+
+/* Default state for panels (visible without animation initially) */
+.panel {
+  opacity: 1; /* Ensure panels are visible by default */
+  transform: translateY(0); /* No offset initially */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Hidden state (used by JavaScript to hide panels before they scroll into view) */
+.panel.hidden {
+  opacity: 0;
+  transform: translateY(20px); /* Slight offset for fade-in */
+}
+
+/* When panels become visible */
+.panel.visible {
+  opacity: 1;
+  transform: translateY(0); /* Reset position */
+}
+
+
+
+// quarto-scss-analysis-annotation { "origin": null }

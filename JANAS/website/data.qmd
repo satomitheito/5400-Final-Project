@@ -1,0 +1,29 @@
+---
+title: "Data"
+---
+
+**JANAS'** dataset is acquired through a multi-step pipeline, encompassing techniques such as web scraping, translation, and sentiment scoring. 
+
+## Web Scraping
+
+For JANAS to work at peak performance, we utilized several web scraping algorithms to help parse through all the pages within our news source links and extract the text directly. JANAS pulls real-time data, supplying the most recent articles featured on each of our source websites, meaning that running JANAS at a separate time will yield different results. 
+
+### American Web Scraping
+
+When scraping the different news sources in America (CNN, Huffington Post, and Fox News) for their texts, we used a Python package entitled *newspaper3k*. With this, we could create newspaper objects out of the initial 
+
+### Japanese Web Scraping
+
+Unfortunately, *newspaper3k* does not support Japanese text, and thus, our strategy for pulling texts for our Japanese sources (毎日新聞 (Mainichi Shinbun)、産経新聞 (Sankei Shinbun), and NHK) looked a little bit different. Using both *Selenium* and *BeautifulSoup*, we were able to parse through the top stories in each of these sources and extract their text. 
+
+
+## Translation and Sentiment Scoring
+
+For details on our translation techniques and sentiment scoring, please look [here](trans_sent.qmd)
+
+## Final Dataset
+
+Our final dataset includes the following columns: 
+
+*Make table/list here
+
