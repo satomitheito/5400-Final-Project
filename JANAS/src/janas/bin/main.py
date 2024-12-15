@@ -79,7 +79,6 @@ if __name__ == "__main__":
 
         # translate japanese articles
         logger.info("Translating Japanese articles")
-        #japanese_translated_df = translate_articles(merged_df)
         japanese_translated_df = translate_articles(japanese_df)
 
         # sentiment analysis on translated
