@@ -6,6 +6,9 @@ from janas.sentiment_scoring.sentiment import analyze_sentiment
 
 
 def test_am_scrape():
+    """
+    Test function for article scraping from a topic page in American articles
+    """
     data = fetch_and_save_articles(
         {"Politics": "https://www.cnn.com/politics"}, "CNN", "Left", 1
     )
@@ -14,6 +17,9 @@ def test_am_scrape():
 
 
 def test_nhk_scrape():
+    """
+    Test function for an article link to nhk
+    """
     title, text = get_nhk_arts(
         "https://www3.nhk.or.jp/news/html/20241214/k10014667891000.html"
     )
@@ -22,6 +28,9 @@ def test_nhk_scrape():
 
 
 def test_san_scrape():
+    """
+    Test function for an article link to sankei
+    """
     title, text = get_sankei_arts(
         "https://www.sankei.com/article/20241215-RP4KZNF4OZLFPDL2UD3UVRQTME/"
     )
@@ -30,6 +39,9 @@ def test_san_scrape():
 
 
 def test_mai_scrape():
+    """
+    Test function for an article link to mainichi
+    """
     title, text = get_mainichi_arts(
         "https://mainichi.jp/articles/20241214/k00/00m/030/134000c"
     )
@@ -38,6 +50,9 @@ def test_mai_scrape():
 
 
 def test_translate():
+    """
+    Test function for translating a collected article from a Japanese article link
+    """
     title_m, text_m = get_mainichi_arts(
         "https://mainichi.jp/articles/20241214/k00/00m/030/134000c"
     )
@@ -52,6 +67,9 @@ def test_translate():
 
 
 def test_sentiment_am():
+    """
+    Test function for getting sentiment of an English article
+    """
     data = fetch_and_save_articles(
         {"Politics": "https://www.cnn.com/politics"}, "CNN", "Left", 1
     )
@@ -61,6 +79,9 @@ def test_sentiment_am():
 
 
 def test_sentiment_jp():
+    """
+    Test function for getting sentiment of a Japanese article
+    """
     title, text = get_mainichi_arts(
         "https://mainichi.jp/articles/20241214/k00/00m/030/134000c"
     )

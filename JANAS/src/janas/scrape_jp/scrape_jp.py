@@ -49,6 +49,9 @@ def get_mainichi_art_urls(src_url):
 
 
 def get_sankei_art_urls(src_url):
+    """
+    Function to get list of articles from topic page of sankey
+    """
     response = requests.get(src_url)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, "html.parser")
@@ -67,6 +70,9 @@ def get_sankei_art_urls(src_url):
 
 
 def get_nhk_art_urls(src_url):
+    """
+    Function to get list of articles from topic page of nhk
+    """
     # Set up Selenium WebDriver
     driver = webdriver.Chrome()
     try:
@@ -92,6 +98,9 @@ def get_nhk_art_urls(src_url):
 
 
 def get_urls(topic_dict, src):
+    """
+    Get URLs from a topic dictionary
+    """
     data = {"link": [], "source": [], "bias": [], "topic": []}
     for topic in topic_dict.keys():
         if src == "mainichi":
@@ -120,6 +129,9 @@ def get_urls(topic_dict, src):
 
 
 def get_mainichi_arts(article_url):
+    """
+    Function to get article from an article link from mainichi
+    """
     logger.info("Parsing URL")
     response = requests.get(article_url)
     response.raise_for_status()
@@ -144,6 +156,9 @@ def get_mainichi_arts(article_url):
 
 
 def get_nhk_arts(article_url):
+    """
+    Function to get article from an article link from nhk
+    """
     logger.info("Parsing URL")
     response = requests.get(article_url)
     response.raise_for_status()
@@ -174,6 +189,9 @@ def get_nhk_arts(article_url):
 
 
 def get_sankei_arts(article_url):
+    """
+    Function to get article from an article link from sankei
+    """
     logger.info("Parsing URL")
     response = requests.get(article_url)
     response.raise_for_status()
@@ -196,6 +214,9 @@ def get_sankei_arts(article_url):
 
 
 def get_article_dict(topic_dict, src):
+    """
+    Function to get all articles from collected urls
+    """
     if src == "mainichi":
         mainichi_art_urls = get_urls(topic_dict, "mainichi")
         mainichi_art_urls["title"] = []
@@ -231,6 +252,9 @@ def get_article_dict(topic_dict, src):
 
 
 def get_articles():
+    """
+    Function to get all articles from topic dictionaries
+    """
     mainichi_arts = get_article_dict(mainichi_topics, "mainichi")
     mainichi_df = pd.DataFrame(mainichi_arts)
     nhk_arts = get_article_dict(nhk_topics, "nhk")

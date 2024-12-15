@@ -5,6 +5,14 @@ import numpy as np
 
 
 def plot_topic_vs_compound(data, title, color, country):
+    """
+    This function plots the compound score vs the topic for a given country
+    inputs:
+    - data: df with the scores, topics, and countries
+    - title: string for title of graph
+    - color: color for points on scatter plot
+    - country: country that we are analyzing
+    """
     plt.figure(figsize=(10, 6))
     plt.scatter(data["topic"], data["compound"], alpha=0.6, color=color)
     plt.title(title, fontsize=14)
@@ -18,6 +26,14 @@ def plot_topic_vs_compound(data, title, color, country):
 
 
 def make_graphs(og_fpath, translated_fpath):
+    """
+    This function runs a variety of analysis on the data produced by the JANAS package. The data is collected from web scraping and deep learning tools and then the graphs are put in the plot directory for further analysis by the user
+    inputs:
+    - og_fpath: path to the american and japanese combined csv with sentiment scores
+    - translated_fpath: path to japanese translated csv with translated and original sentiment scores
+
+    outputs 9 graphs to plots folder
+    """
     all_articles = pd.read_csv(og_fpath)
     translated_article = pd.read_csv(translated_fpath)
 
