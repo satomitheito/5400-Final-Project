@@ -21,6 +21,9 @@ def analyze_sentiment(article: str, country):
         Bert model
         Softmax
         Calculating compound score
+
+    Input -> Article text and country
+    Output -> Negative, positive, neutral, compound score
     """
 
 

@@ -12,6 +12,11 @@ model = transformers.EncoderDecoderModel.from_pretrained("sappho192/jesc-ja-en-t
 
 
 def translate_in_chunks(text, max_length=512):
+    """
+    Function that take texts in chunks
+    Input -> Text (with max length 512)
+    Output -> Combines text translation
+    """
     # Tokenize the text into tokens without truncating
     tokens = src_tokenizer(text, return_tensors='pt', truncation=False)['input_ids'][0]
     # Split tokens into chunks that fit the max input length
@@ -35,6 +40,11 @@ def translate_in_chunks(text, max_length=512):
     return " ".join(translations)  # Combine all chunk translations
 
 def translate_articles(df):
+    """
+    Function that translate texts
+     Input -> DataFrame
+     Output -> Translated DataFrame
+    """
     translations = []
     counter = 1
     for content in df['content']:
