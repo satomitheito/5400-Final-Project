@@ -11,8 +11,11 @@ As a result, through web scraping, translations, and deep learning sentiment ana
 To learn more about this package, our methods, and our findings, please visit our [website](https://satomitheito.github.io/NLP-Article-Analysis/)!
 
 
-[https://satomitheito.github.io/NLP-Article-Analysis/](https://satomitheito.github.io/NLP-Article-Analysis/)
+[Link to website](https://satomitheito.github.io/NLP-Article-Analysis/)
 
+Additionally, please see our [slides](img/5400_final.pdf) to learn more about our results.
+
+[Link to slides](img/5400_final.pdf)
 
 ## Installation
 
