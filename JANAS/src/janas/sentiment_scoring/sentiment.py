@@ -21,14 +21,14 @@ def analyze_sentiment(article: str, country):
     """
 
     if country == "US" or country == "JP_Trans":
-        # English article sentiment analysis
         logger.info("Detected language: English")
         sid = SentimentIntensityAnalyzer()
         sentiment = sid.polarity_scores(article)
         logger.info(sentiment)
     elif country == "Japan":
         logger.info("Detected language: Japanese")
-
+        sid = SentimentIntensityAnalyzer()
+        sentiment = sid.polarity_scores(article)
         # Load Japanese BERT model and tokenizer
         model_name = "christian-phu/bert-finetuned-japanese-sentiment"
         tokenizer = BertJapaneseTokenizer.from_pretrained(model_name)
@@ -62,7 +62,7 @@ def analyze_sentiment(article: str, country):
         sentiment_scores["compound"] = compound_score
 
         sentiment = sentiment_scores
-        logger.info(sentiment)
+        #logger.info(sentiment)
     else:
         sentiment = {"error": "Unsupported language detected"}
         logger.info(sentiment)
