@@ -1,11 +1,15 @@
-from transformers import BertJapaneseTokenizer, BertForSequenceClassification
+from transformers import BertJapaneseTokenizer, BertForSequenceClassification, AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from langdetect import detect
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
 import logging
+
+#logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
-nltk.download('vader_lexicon')
+
+MODEL_NAME = "christian-phu/bert-finetuned-japanese-sentiment"
+tokenizer = BertJapaneseTokenizer.from_pretrained(MODEL_NAME)
+model = BertForSequenceClassification.from_pretrained(MODEL_NAME)
 
 
 def analyze_sentiment(article: str):
@@ -14,7 +18,7 @@ def analyze_sentiment(article: str):
     Function that takes in article content as a string and conduct sentiment analysis based on language. 
     If English:
         VADER 
-    If Japanese:
+    If Japanese:x
         BERT Tokenization
         Bert model
         Softmax
@@ -29,13 +33,17 @@ def analyze_sentiment(article: str):
         print("Detected language: English") 
         sid = SentimentIntensityAnalyzer()
         sentiment = sid.polarity_scores(article)
+        print(sentiment)
         print("Success in english sentiment") 
+        logger.info(sentiment)
     elif lang == "ja":
         
         # Load Japanese BERT model and tokenizer
-        model_name = "christian-phu/bert-finetuned-japanese-sentiment"
-        tokenizer = BertJapaneseTokenizer.from_pretrained(model_name)
-        model = BertForSequenceClassification.from_pretrained(model_name)
+        #model_name = "christian-phu/bert-finetuned-japanese-sentiment"
+        #tokenizer = AutoTokenizer.from_pretrained(model_name)
+        #model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        #tokenizer = BertJapaneseTokenizer.from_pretrained(model_name)
+        #model = BertForSequenceClassification.from_pretrained(model_name)
         
         # Tokenize and preprocess the input text
         inputs = tokenizer(article, return_tensors="pt", truncation=True, max_length=512)
@@ -63,7 +71,8 @@ def analyze_sentiment(article: str):
         sentiment_scores['compound'] = compound_score
         
         sentiment = sentiment_scores
-        #logger.info(sentiment)
+        print(sentiment)
+        logger.info(sentiment)
         print("successfully recorded down a sentiment for japanese")
     else:
         sentiment = {"error": f"Unsupported language detected: {lang}"}
