@@ -1,0 +1,106 @@
+---
+title: "Data"
+format: html
+---
+
+
+**JANAS'** dataset is acquired through a multi-step pipeline, encompassing techniques such as web scraping, translation, and sentiment scoring. This data collection process allows JANAS to pull insights from **both Japanese and American news sources**, making it a comprehensive tool for cross-cultural media analysis.
+
+
+
+## Web Scraping
+
+For JANAS to work at peak performance, we utilized several web scraping algorithms to help parse through all the pages within our news source links and extract the text directly. JANAS pulls real-time data, supplying the most recent articles featured on each of our source websites, meaning that running JANAS at a separate time will yield different results. These pipelines extract and clean textual content from target websites in **real time**, which means that running JANAS on different occasions will yield **different datasets** based on the latest articles available.
+
+Web scraping methodologies differ slightly between **American** and **Japanese news sources** due to language and technical support for specific tools.
+
+
+### American Web Scraping
+
+When scraping the different news sources in America (**CNN**, **Huffington Post**, and **Fox News**) for their texts, we used a Python package entitled **`newspaper3k`**. With this, we could create newspaper objects out of the initial 
+
+
+#### **How It Works:**
+1. **News Source Links**: We input the URLs of the primary news pages into our scraper.
+2. **Text Extraction**: `newspaper3k` automates:
+   - Crawling the URLs to identify individual articles.
+   - Extracting headlines, article bodies, authors, and publish dates.
+3. **Cleaning the Data**: The extracted text is cleaned and pre-processed to remove irrelevant content (e.g., advertisements, duplicate articles, etc.).
+
+
+
+### **Japanese Web Scraping**
+
+The Japanese sources—**毎日新聞 (Mainichi Shinbun)**, **産経新聞 (Sankei Shinbun)**, and **NHK**—presented a unique challenge as **`newspaper3k`** does not support Japanese text. To overcome this limitation, we employed a two-pronged strategy using:
+
+- **Selenium**: For dynamic webpage rendering (required for modern, JavaScript-heavy websites).
+- **BeautifulSoup**: For parsing and extracting the article's content.
+
+#### **Our Approach:**
+1. **Dynamic Scraping**: Selenium automates browser navigation, allowing us to click through each article on our topic pages
+2. **Content Parsing**: BeautifulSoup parses the rendered pages to:
+   - Locate the primary article body using HTML tags.
+   - Extract titles, article text, and metadata from the Japanese article, in Japanese.
+3. **Text Processing**: Japanese text is cleaned and formatted to ensure consistency across all sources utilizing several methods detailed [here](trans_sent.qmd).
+
+As a result, this pipeline allows JANAS to handle non-Latin scripts effectively and produce a unified dataset.
+
+
+
+
+## Translation and Sentiment Scoring
+
+Once the raw text data has been collected, we process it through two additional steps: **translation** and **sentiment scoring**.
+
+1. **Translation**: To analyze Japanese news articles alongside English articles, we used **Hugging Face's `transformers`** library to implement machine translation models. Japanese articles were translated into English, attempting to mitigate nuanced losses.
+
+2. **Sentiment Scoring**: For sentiment analysis:
+   - **English articles**: We used VADER (Valence Aware Dictionary and Sentiment Reasoner) to score the polarity (positive, neutral, or negative) of each article, combined as a weighted average into a compound score.
+   - **Japanese articles**: 
+     - From **HuggingFace**, a pre-trained BERT model which was fine-tuned for sentiment analysis was used
+     - After translation, the same VADER model was applied to ensure consistency across both datasets.
+
+For more detailed information on our translation and sentiment scoring methods, please visit the [Translation & Sentiment Model](trans_sent.qmd) section.
+
+
+## Final Dataset
+
+Our final datasets include (with time stamps): 
+
+
+### **1. Initial Article Sentiment**  
+
+This dataset includes the raw sentiment scoring of articles in their **native languages** (English and Japanese).
+
+:::{.table}
+| **Column Name** | **Description**                                              |
+|------------------|--------------------------------------------------------------|
+| `link`          | The URL linking to the original article.                     |
+| `source`        | Name of the news source (e.g., CNN, NHK).                    |
+| `bias`          | Political bias (left, center, right) for American sources.   |
+| `topic`         | The article topic (e.g., politics, business, trending).      |
+| `title`         | The headline or title of the article.                        |
+| `content`       | The article body text in its original language.              |
+| `Country`       | Country of origin (Japan or America).                        |
+| `compound`      | VADER compound sentiment score (-1 = negative, 1 = positive).|
+:::
+
+
+### **2. Translation Sentiment Dataset**  
+
+This dataset provides the **translated text** of Japanese articles and compares sentiment scores before and after translation.
+
+:::{.table}
+| **Column Name**        | **Description**                                                  |
+|-------------------------|------------------------------------------------------------------|
+| `link`                 | The URL linking to the original article.                         |
+| `source`               | Name of the news source (e.g., Sankei Shinbun, Mainichi).        |
+| `bias`                 | Political bias for American articles (left, center, right).      |
+| `topic`                | The topic of the article (e.g., politics, business, trending).   |
+| `title`                | The article headline or title.                                   |
+| `content`              | The original Japanese article text.                              |
+| `Country`              | Country of origin (Japan or America).                            |
+| `translation`          | The translated English version of the article.                   |
+| `translation_compound` | Sentiment score of the **translated text** (-1 to 1 range).      |
+| `compound`             | Sentiment score of the **original text** (-1 to 1 range).        |
+:::

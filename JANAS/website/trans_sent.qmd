@@ -1,0 +1,84 @@
+---
+title: "Translation & Sentiment Model"
+---
+
+## Translation 
+
+An interesting question arises when analyzing our Japanese news articles:  
+> *"If we were to use translated text, would the sentiment remain consistent with the original language?"*
+
+To address this, we implemented **machine translation** to convert Japanese articles into English. After doing so, it allows us to compare sentiment scores **pre-translation** (native Japanese) and **post-translation** (English).
+
+
+### **Our Approach:**
+1. **Translation Model**: We used Hugging Face’s pre-trained **transformer-based translation models** for Japanese-to-English translation.  
+2. **Integration**: The translated text was stored as a **separate column** in our dataset, ensuring side-by-side comparisons.  
+3. **Output**: Both the original Japanese text and its English translation were retained for analysis.
+
+
+
+## **Sentiment Scoring**  
+
+When conducting sentiment analysis, we needed to account for differences between English and Japanese languages, particularly in terms of **language structure** and **sentiment expression**. To tackle a challenge like this, we needed to come up with a method that applied distinct models for each language.
+
+### **Sentiment Analysis for English**  
+
+For English-language articles, we employed **VADER** (Valence Aware Dictionary and Sentiment Reasoner), a lexicon and rule-based sentiment analysis model.
+
+- **Tool Used**: The **`SentimentIntensityAnalyzer`** from the **`nltk` library**.
+- **Why VADER?**:  
+   VADER is designed specifically to analyze **social media text** and **news articles** with accurate results for shorter sentences, which permits us to have full coverage of emotional overlay.  
+
+#### **VADER Sentiment Metrics**:
+The model outputs four key scores:
+1. **Positive**: Percentage of positive tones within the words in the text.
+2. **Negative**: Percentage of negative words.
+3. **Neutral**: Percentage of neutral words.
+4. **Compound**: The **aggregated score** that combines the positive, negative, and neutral probabilities into a single value:  
+      - Ranges from **-1** (most negative) to **1** (most positive).  
+      - Scores near **0** indicate neutrality.
+
+
+### Sentiment Analysis for Japanese
+From Hugging Face, a pre-trained BERT model which was fine-tuned for sentiment analysis was used.
+- To tokenize our text, we used **BertJapaneseTokenizer**.
+- The BERT model generates logits, raw and unnormalized scores, which needs to be ran through a softmax function. 
+- This softmax function then generates the likelihood of the text being positive, negative, and neutral. 
+- The compound score is then calcualted by the weight of the sum of all likelihoods.
+
+
+### **Sentiment Analysis for Japanese**  
+
+Japanese sentiment analysis required a more robust and language-specific approach due to the complexities of Japanese syntax, linguistic nature, and entirely new alphabet. For this, we used a **pre-trained BERT model** fine-tuned for Japanese sentiment analysis.
+
+#### **Our Workflow**:
+1. **Text Tokenization**:  
+   We used the **`BertJapaneseTokenizer`** to segment Japanese text into tokens.  
+
+2. **Sentiment Prediction**:  
+   - The BERT model generates **logits**: raw, unnormalized scores for each sentiment class (positive, negative, and neutral).  
+   - These logits are passed through a **softmax function**, which converts them into **probabilities** for each sentiment category.
+
+3. **Compound Score Calculation**:  
+   The final **compound score** was computed as a weighted sum of the likelihoods for each sentiment class where:   
+
+   - Positive values indicate a **positive sentiment**.  
+   - Negative values indicate a **negative sentiment**.  
+   - Values near 0 represent **neutral sentiment**.
+
+#### **Why BERT?**  
+- BERT is a **transformer-based model** capable of understanding **contextual meaning** in sentences.  
+- After fine-tuning on Japanese text, BERT can effectively captures the nuances of sentiment within Japanese articles.
+
+
+## **Model Comparison**
+
+The table below summarizes the models and tools used for sentiment analysis in both languages:
+
+::: {.table}
+| **Language**     | **Model**              | **Tool/Library**      | **Output**                            |
+|-------------------|------------------------|-----------------------|--------------------------------------|
+| English          | VADER                 | `nltk`               | Positive %, Negative %, Neutral %, Compound Score |
+| Japanese (Native)| Fine-tuned BERT       | Hugging Face          | Positive likelihood, Negative likelihood, Neutral likelihood, Compound Score |
+| Japanese (Translated)| VADER             | `nltk`               | Same as English (post-translation)   |
+:::

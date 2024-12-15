@@ -50,7 +50,8 @@ def get_mainichi_art_urls(src_url):
 
 def get_sankei_art_urls(src_url):
     """
-    Function to get list of articles from topic page of sankey
+    Function to get list of article urls from topic page of Sankei
+    Return: URL to article
     """
     response = requests.get(src_url)
     response.raise_for_status()
@@ -74,6 +75,10 @@ def get_nhk_art_urls(src_url):
     Function to get list of articles from topic page of nhk
     """
     # Set up Selenium WebDriver
+    """
+    Function to get list of article urls from topic page of NHK
+    Return: URL to article
+    """
     driver = webdriver.Chrome()
     try:
         # Open the target webpage
@@ -99,7 +104,8 @@ def get_nhk_art_urls(src_url):
 
 def get_urls(topic_dict, src):
     """
-    Get URLs from a topic dictionary
+    Function to get list of article urls
+    Return: URL to article
     """
     data = {"link": [], "source": [], "bias": [], "topic": []}
     for topic in topic_dict.keys():
@@ -130,7 +136,8 @@ def get_urls(topic_dict, src):
 
 def get_mainichi_arts(article_url):
     """
-    Function to get article from an article link from mainichi
+    Function to get elements of article urls from topic page of Mainichi
+    Return: Title and content
     """
     logger.info("Parsing URL")
     response = requests.get(article_url)
@@ -157,7 +164,8 @@ def get_mainichi_arts(article_url):
 
 def get_nhk_arts(article_url):
     """
-    Function to get article from an article link from nhk
+    Function to get elements of article urls from topic page of NHK
+    Return: Title and content
     """
     logger.info("Parsing URL")
     response = requests.get(article_url)
@@ -190,7 +198,8 @@ def get_nhk_arts(article_url):
 
 def get_sankei_arts(article_url):
     """
-    Function to get article from an article link from sankei
+    Function to get elements of article urls from topic page of Sankei
+    Return: Title and content
     """
     logger.info("Parsing URL")
     response = requests.get(article_url)
@@ -215,7 +224,8 @@ def get_sankei_arts(article_url):
 
 def get_article_dict(topic_dict, src):
     """
-    Function to get all articles from collected urls
+    Function to get content from article urls from topic page
+    Return: URL
     """
     if src == "mainichi":
         mainichi_art_urls = get_urls(topic_dict, "mainichi")
@@ -253,7 +263,8 @@ def get_article_dict(topic_dict, src):
 
 def get_articles():
     """
-    Function to get all articles from topic dictionaries
+    Function to get article
+    Return: All features in the collected news
     """
     mainichi_arts = get_article_dict(mainichi_topics, "mainichi")
     mainichi_df = pd.DataFrame(mainichi_arts)

@@ -55,9 +55,8 @@ if __name__ == "__main__":
 
         # sentiment analysis on th emerged dataset
         logger.info("Sentiment analysis on merged dataset")
-
         merged_df["Sentiment"] = merged_df.apply(
-            lambda x: analyze_sentiment(x.content, x.Country), axis=1
+            lambda row: analyze_sentiment(row["content"], row["Country"]), axis=1
         )
         sentiment_df = pd.json_normalize(merged_df["Sentiment"])
         sentiment_df = sentiment_df.reset_index(drop=True)
@@ -80,14 +79,13 @@ if __name__ == "__main__":
 
         # translate japanese articles
         logger.info("Translating Japanese articles")
-        japanese_translated_df = translate_articles(merged_df)
-        #japanese_translated_df = translate_articles(japanese_df)
+        japanese_translated_df = translate_articles(japanese_df)
 
         # sentiment analysis on translated
         japanese_translated_df["Country"] = "JP_Trans"
         logger.info("Performing sentiment analysis on translated content")
         japanese_translated_df["Translated_sentiment"] = japanese_translated_df.apply(
-            lambda x: analyze_sentiment(x.translation, x.Country), axis=1
+            lambda row: analyze_sentiment(row["translation"], row["Country"]), axis=1
         )
 
         t_sentiment_df = pd.json_normalize(

@@ -14,9 +14,9 @@ model = transformers.EncoderDecoderModel.from_pretrained(
 
 def translate_in_chunks(text, max_length=512):
     """
-    Utitility function split articles into shorter sections before translating
-    input: article text, max length of each section
-    output: string of translation
+    Function that take texts in chunks
+    Input -> Text (with max length 512)
+    Output -> Combines text translation
     """
     # Tokenize the text into tokens without truncating
     tokens = src_tokenizer(text, return_tensors="pt", truncation=False)["input_ids"][0]
@@ -43,9 +43,9 @@ def translate_in_chunks(text, max_length=512):
 
 def translate_articles(df):
     """
-    Function to take in dataframe of japanese articles and translate article to English
-    input: df of japanese articles
-    output: df with added translated English column
+    Function that translate texts
+     Input -> DataFrame
+     Output -> Translated DataFrame
     """
     translations = []
     counter = 1
