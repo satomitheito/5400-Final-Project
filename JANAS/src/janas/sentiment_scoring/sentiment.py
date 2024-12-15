@@ -26,12 +26,11 @@ def analyze_sentiment(article: str):
 
     if lang == "en":
         # English article sentiment analysis
-        logger.info("Detected language: English") 
+        print("Detected language: English") 
         sid = SentimentIntensityAnalyzer()
         sentiment = sid.polarity_scores(article)
-        logger.info(sentiment) 
+        print("Success in english sentiment") 
     elif lang == "ja":
-        logger.info("Detected language: Japanese") 
         
         # Load Japanese BERT model and tokenizer
         model_name = "christian-phu/bert-finetuned-japanese-sentiment"
@@ -64,10 +63,11 @@ def analyze_sentiment(article: str):
         sentiment_scores['compound'] = compound_score
         
         sentiment = sentiment_scores
-        logger.info(sentiment)
+        #logger.info(sentiment)
+        print("successfully recorded down a sentiment for japanese")
     else:
         sentiment = {"error": f"Unsupported language detected: {lang}"}
-        logger.info(sentiment)
+        print('fail')
 
     return sentiment
 
