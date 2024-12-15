@@ -21,6 +21,7 @@ lxml-html-clean = "^0.4.1"
 protobuf = "^5.29.1"
 fugashi = "^1.4.0"
 unidic-lite = "^1.0.8"
+numpy = "1.26.4"
 
 [tool.poetry.dev-dependencies]
 

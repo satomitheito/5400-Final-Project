@@ -7,6 +7,8 @@ from janas.scrape_am.scrape_am_articles import get_am_articles as get_american_a
 from janas.sentiment_scoring.sentiment import analyze_sentiment
 from janas.translation.translation import translate_articles
 from janas.analysis.summarize import make_graphs as graph_generate
+import nltk
+nltk.download('vader_lexicon')
 
 # loggins
 logging.basicConfig(
@@ -78,7 +80,8 @@ if __name__ == "__main__":
 
         # translate japanese articles
         logger.info("Translating Japanese articles")
-        japanese_translated_df = translate_articles(japanese_df)
+        japanese_translated_df = translate_articles(merged_df)
+        #japanese_translated_df = translate_articles(japanese_df)
 
         # sentiment analysis on translated
         japanese_translated_df["Country"] = "JP_Trans"
