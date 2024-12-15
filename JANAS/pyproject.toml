@@ -18,6 +18,10 @@ torch = "^2.5.1"
 langdetect = "^1.0.9"
 nltk = "^3.9.1"
 seaborn = "^0.13.2"
+lxml-html-clean = "^0.4.1"
+protobuf = "^5.29.1"
+fugashi = "^1.4.0"
+unidic-lite = "^1.0.8"
 
 [tool.poetry.dev-dependencies]
 
