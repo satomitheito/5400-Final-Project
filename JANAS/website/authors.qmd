@@ -1,0 +1,34 @@
+---
+title: "Authors"
+---
+
+Authors of this project will be given via vibe photo. If you are Trevor Adriaanse you'll have to guess who out of the three of us fall under these photos. Your choices are: 
+
+
+- Samyu Vakkalanka
+- Satomi Ito
+- Trey Roark
+
+
+---
+
+
+# Author 1's Vibe Pictures: 
+
+![](photos/satomi_image1.jpg)
+
+# Author 2's Vibe Pictures: 
+
+::: {.columns}
+![](photos/trey_image1.jpg){width=60%} 
+![](photos/trey_image2.jpg){width=60%}
+:::
+
+
+# Author 3's Vibe Pictures: 
+
+![](photos/samyu_image1.jpg){width=60%} 
+
+
+
+

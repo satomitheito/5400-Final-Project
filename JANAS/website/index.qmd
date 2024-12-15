@@ -1,0 +1,28 @@
+---
+title: "JANAS: Japanese and American News Analysis through Sentiment"
+bibliography: references.bib
+---
+
+
+As news spheres exist independently across nations, we’re currently left to wonder if certain events and topics beyond borders are portrayed in a similar light. Understanding the portrayals can provide a deeper insight into cross-cultural communication.
+
+Recent work has shown that sentiment analysis can reveal how media from different countries depict similar topics. For example, in the study “Comparative Analysis of Japan and the US Cybersecurity Related Newspaper Articles” by
+Piyush Ghasiya and Koji Okamura, they utilized NLP and machine learning techniques to compare sentiment in cybersecurity articles from Japan and US newspapers. Their findings highlight how cultural and political differences shape media coverage, even when the topic is shared between two countries [@Cybersecurity]. Additionally, an analysis of US media showed significant sentiment variation by topics: articles on Huawei and China were 91.8% positive, while coverage of Facebook and Russia had 57.2% negative sentiment. These key findings highlight the importance of topic-specific analysis and political sentiments.
+
+In order to bridge this gap in Natural Language Processing (NLP_, our team decided to continue further comparative sentiment analysis. Thus, allow us to introduce JANAS, a Japanese and American News Analysis through Sentiment. Through JANAS, we focus on multilingual sentiment across the US and Japan as it relates to news portrayals of similar topics. Mainly, we’d consider those tabs you see on everyday news: Trending news, Politics, Business, etc. This motivation permits us to investigate the sentimental portrayal of these topics with the goal of comparative analysis and real-time data manipulation. Our package scrapes the internet of various sources to provide the most recent stories regarding these topics, creating a dataset containing attributes available to the user for their own analysis. 
+
+As a result, through web scraping, translations, and deep learning sentiment analysis, we hope to provide a snapshot of an  empirical review towards gaining an understanding of how the US and Japan portray news in the media. 
+
+
+## Acknowledgements
+
+Shoutout to our Computation Linguistics & NLP Professor Trevor Adriaanse for his guidance and support on this project. 
+
+Also shoutout to all the divas of 5400, our corner girl conversations were always so enlightening. 
+
+
+
+
+
+
+

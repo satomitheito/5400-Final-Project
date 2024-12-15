@@ -1,0 +1,27 @@
+---
+title: "Translation & Sentiment Model"
+---
+
+
+
+## Translation 
+
+An interesting question to raise when looking at our Japanese news articles is: If we were to use translated text, would the sentiment 
+
+Thus, to investigate this question, we translated our Japanese articles to English using *Hugging Face*. Afterwards, the translated text was saved as a separate column in the data set. 
+
+
+## Sentiment Scoring
+
+When conducting sentiment analysis on English and Japanese articles, we would need to be able to detect the language disparity. 
+
+### Sentiment Analysis for English 
+We conducted VADER, a lexicon and rule based model, sentiment analysis for English articles. The **SentimentIntensityAnalyzer** from the **nltk** library is used. 
+- This provides scores such as the percentage of positive, negative, and neurtal words in the given text as well as a compound score, which is the aggregated score of all three probabilities. 
+
+### Sentiment Analysis for Japanese
+From Hugging Face, a pre-trained BERT model which was fine-tuned for sentiment analysis was used.
+- To tokenize our text, we used **BertJapaneseTokenizer**.
+- The BERT model generates logits, raw and unnormalized scores, which needs to be ran through a softmax function. 
+- This softmax function then generates the likelihood of the text being positive, negative, and neutral. 
+- The compound score is then calcualted by the weight of the sum of all likelihoods.
