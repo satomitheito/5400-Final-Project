@@ -130,12 +130,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#translation" id="toc-translation" class="nav-link active" data-scroll-target="#translation">Translation</a></li>
-  <li><a href="#sentiment-scoring" id="toc-sentiment-scoring" class="nav-link" data-scroll-target="#sentiment-scoring">Sentiment Scoring</a>
+  <li><a href="#translation" id="toc-translation" class="nav-link active" data-scroll-target="#translation">Translation</a>
   <ul class="collapse">
-  <li><a href="#sentiment-analysis-for-english" id="toc-sentiment-analysis-for-english" class="nav-link" data-scroll-target="#sentiment-analysis-for-english">Sentiment Analysis for English</a></li>
-  <li><a href="#sentiment-analysis-for-japanese" id="toc-sentiment-analysis-for-japanese" class="nav-link" data-scroll-target="#sentiment-analysis-for-japanese">Sentiment Analysis for Japanese</a></li>
+  <li><a href="#our-approach" id="toc-our-approach" class="nav-link" data-scroll-target="#our-approach"><strong>Our Approach:</strong></a></li>
   </ul></li>
+  <li><a href="#sentiment-scoring" id="toc-sentiment-scoring" class="nav-link" data-scroll-target="#sentiment-scoring"><strong>Sentiment Scoring</strong></a>
+  <ul class="collapse">
+  <li><a href="#sentiment-analysis-for-english" id="toc-sentiment-analysis-for-english" class="nav-link" data-scroll-target="#sentiment-analysis-for-english"><strong>Sentiment Analysis for English</strong></a></li>
+  <li><a href="#sentiment-analysis-for-japanese" id="toc-sentiment-analysis-for-japanese" class="nav-link" data-scroll-target="#sentiment-analysis-for-japanese">Sentiment Analysis for Japanese</a></li>
+  <li><a href="#sentiment-analysis-for-japanese-1" id="toc-sentiment-analysis-for-japanese-1" class="nav-link" data-scroll-target="#sentiment-analysis-for-japanese-1"><strong>Sentiment Analysis for Japanese</strong></a></li>
+  </ul></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><strong>Model Comparison</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -163,22 +168,120 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="translation" class="level2">
 <h2 class="anchored" data-anchor-id="translation">Translation</h2>
-<p>An interesting question to raise when looking at our Japanese news articles is: If we were to use translated text, would the sentiment</p>
-<p>Thus, to investigate this question, we translated our Japanese articles to English using <em>Hugging Face</em>. Afterwards, the translated text was saved as a separate column in the data set.</p>
+<p>An interesting question arises when analyzing our Japanese news articles:<br>
+&gt; <em>“If we were to use translated text, would the sentiment remain consistent with the original language?”</em></p>
+<p>To address this, we implemented <strong>machine translation</strong> to convert Japanese articles into English. After doing so, it allows us to compare sentiment scores <strong>pre-translation</strong> (native Japanese) and <strong>post-translation</strong> (English).</p>
+<section id="our-approach" class="level3">
+<h3 class="anchored" data-anchor-id="our-approach"><strong>Our Approach:</strong></h3>
+<ol type="1">
+<li><strong>Translation Model</strong>: We used Hugging Face’s pre-trained <strong>transformer-based translation models</strong> for Japanese-to-English translation.<br>
+</li>
+<li><strong>Integration</strong>: The translated text was stored as a <strong>separate column</strong> in our dataset, ensuring side-by-side comparisons.<br>
+</li>
+<li><strong>Output</strong>: Both the original Japanese text and its English translation were retained for analysis.</li>
+</ol>
+</section>
 </section>
 <section id="sentiment-scoring" class="level2">
-<h2 class="anchored" data-anchor-id="sentiment-scoring">Sentiment Scoring</h2>
-<p>When conducting sentiment analysis on English and Japanese articles, we would need to be able to detect the language disparity.</p>
+<h2 class="anchored" data-anchor-id="sentiment-scoring"><strong>Sentiment Scoring</strong></h2>
+<p>When conducting sentiment analysis, we needed to account for differences between English and Japanese languages, particularly in terms of <strong>language structure</strong> and <strong>sentiment expression</strong>. To tackle a challenge like this, we needed to come up with a method that applied distinct models for each language.</p>
 <section id="sentiment-analysis-for-english" class="level3">
-<h3 class="anchored" data-anchor-id="sentiment-analysis-for-english">Sentiment Analysis for English</h3>
-<p>We conducted VADER, a lexicon and rule based model, sentiment analysis for English articles. The <strong>SentimentIntensityAnalyzer</strong> from the <strong>nltk</strong> library is used. - This provides scores such as the percentage of positive, negative, and neurtal words in the given text as well as a compound score, which is the aggregated score of all three probabilities.</p>
+<h3 class="anchored" data-anchor-id="sentiment-analysis-for-english"><strong>Sentiment Analysis for English</strong></h3>
+<p>For English-language articles, we employed <strong>VADER</strong> (Valence Aware Dictionary and Sentiment Reasoner), a lexicon and rule-based sentiment analysis model.</p>
+<ul>
+<li><strong>Tool Used</strong>: The <strong><code>SentimentIntensityAnalyzer</code></strong> from the <strong><code>nltk</code> library</strong>.</li>
+<li><strong>Why VADER?</strong>:<br>
+VADER is designed specifically to analyze <strong>social media text</strong> and <strong>news articles</strong> with accurate results for shorter sentences, which permits us to have full coverage of emotional overlay.</li>
+</ul>
+<section id="vader-sentiment-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="vader-sentiment-metrics"><strong>VADER Sentiment Metrics</strong>:</h4>
+<p>The model outputs four key scores: 1. <strong>Positive</strong>: Percentage of positive tones within the words in the text. 2. <strong>Negative</strong>: Percentage of negative words. 3. <strong>Neutral</strong>: Percentage of neutral words. 4. <strong>Compound</strong>: The <strong>aggregated score</strong> that combines the positive, negative, and neutral probabilities into a single value:<br>
+- Ranges from <strong>-1</strong> (most negative) to <strong>1</strong> (most positive).<br>
+- Scores near <strong>0</strong> indicate neutrality.</p>
+</section>
 </section>
 <section id="sentiment-analysis-for-japanese" class="level3">
 <h3 class="anchored" data-anchor-id="sentiment-analysis-for-japanese">Sentiment Analysis for Japanese</h3>
 <p>From Hugging Face, a pre-trained BERT model which was fine-tuned for sentiment analysis was used. - To tokenize our text, we used <strong>BertJapaneseTokenizer</strong>. - The BERT model generates logits, raw and unnormalized scores, which needs to be ran through a softmax function. - This softmax function then generates the likelihood of the text being positive, negative, and neutral. - The compound score is then calcualted by the weight of the sum of all likelihoods.</p>
-
-
 </section>
+<section id="sentiment-analysis-for-japanese-1" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-analysis-for-japanese-1"><strong>Sentiment Analysis for Japanese</strong></h3>
+<p>Japanese sentiment analysis required a more robust and language-specific approach due to the complexities of Japanese syntax, linguistic nature, and entirely new alphabet. For this, we used a <strong>pre-trained BERT model</strong> fine-tuned for Japanese sentiment analysis.</p>
+<section id="our-workflow" class="level4">
+<h4 class="anchored" data-anchor-id="our-workflow"><strong>Our Workflow</strong>:</h4>
+<ol type="1">
+<li><p><strong>Text Tokenization</strong>:<br>
+We used the <strong><code>BertJapaneseTokenizer</code></strong> to segment Japanese text into tokens.</p></li>
+<li><p><strong>Sentiment Prediction</strong>:</p>
+<ul>
+<li>The BERT model generates <strong>logits</strong>: raw, unnormalized scores for each sentiment class (positive, negative, and neutral).<br>
+</li>
+<li>These logits are passed through a <strong>softmax function</strong>, which converts them into <strong>probabilities</strong> for each sentiment category.</li>
+</ul></li>
+<li><p><strong>Compound Score Calculation</strong>:<br>
+The final <strong>compound score</strong> was computed as a weighted sum of the likelihoods for each sentiment class where:</p>
+<ul>
+<li>Positive values indicate a <strong>positive sentiment</strong>.<br>
+</li>
+<li>Negative values indicate a <strong>negative sentiment</strong>.<br>
+</li>
+<li>Values near 0 represent <strong>neutral sentiment</strong>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="why-bert" class="level4">
+<h4 class="anchored" data-anchor-id="why-bert"><strong>Why BERT?</strong></h4>
+<ul>
+<li>BERT is a <strong>transformer-based model</strong> capable of understanding <strong>contextual meaning</strong> in sentences.<br>
+</li>
+<li>After fine-tuning on Japanese text, BERT can effectively captures the nuances of sentiment within Japanese articles.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison"><strong>Model Comparison</strong></h2>
+<p>The table below summarizes the models and tools used for sentiment analysis in both languages:</p>
+<div class="table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 23%">
+<col style="width: 22%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Language</strong></th>
+<th><strong>Model</strong></th>
+<th><strong>Tool/Library</strong></th>
+<th><strong>Output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>English</td>
+<td>VADER</td>
+<td><code>nltk</code></td>
+<td>Positive %, Negative %, Neutral %, Compound Score</td>
+</tr>
+<tr class="even">
+<td>Japanese (Native)</td>
+<td>Fine-tuned BERT</td>
+<td>Hugging Face</td>
+<td>Positive likelihood, Negative likelihood, Neutral likelihood, Compound Score</td>
+</tr>
+<tr class="odd">
+<td>Japanese (Translated)</td>
+<td>VADER</td>
+<td><code>nltk</code></td>
+<td>Same as English (post-translation)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
